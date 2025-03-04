@@ -1,63 +1,81 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import React, { useState } from 'react';  
+import { StyleSheet, Text, TextInput, TouchableOpacity, View, Alert } from 'react-native';  
 
-const LoginPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+export default function LoginScreen() {  
+    const [email, setEmail] = useState('');  
+    const [password, setPassword] = useState('');  
 
-  const handleLogin = () => {
-    if (email === '' || password === '') {
-      Alert.alert('Lỗi', 'Vui lòng nhập đầy đủ thông tin');
-      return;
-    }
-    Alert.alert('Đăng nhập thành công', `Chào mừng ${email}`);
-  };
+    const handleLogin = () => {  
+        if (email && password) {  
+            Alert.alert("Đăng nhập thành công!", `Email: ${email}`);  
+            // Thêm logic kiểm tra đăng nhập ở đây   
+        } else {  
+            Alert.alert("Thông báo", "Vui lòng điền đầy đủ thông tin!");  
+        }  
+    };  
 
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Đăng nhập</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        keyboardType="email-address"
-        value={email}
-        onChangeText={setEmail}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Mật khẩu"
-        secureTextEntry
-        value={password}
-        onChangeText={setPassword}
-      />
-      <Button title="Đăng nhập" onPress={handleLogin} />
-    </View>
-  );
-};
+    return (  
+        <View style={styles.container}>  
+            <Text style={styles.title}>Đăng Nhập</Text>  
+            <TextInput  
+                style={styles.input}  
+                placeholder="Email"  
+                value={email}  
+                onChangeText={setEmail}  
+                keyboardType="email-address"  
+            />  
+            <TextInput  
+                style={styles.input}  
+                placeholder="Mật Khẩu"  
+                value={password}  
+                onChangeText={setPassword}  
+                secureTextEntry  
+            />  
+            <TouchableOpacity style={styles.button} onPress={handleLogin}>  
+                <Text style={styles.buttonText}>Đăng Nhập</Text>  
+            </TouchableOpacity>  
+            <TouchableOpacity onPress={() => Alert.alert("Quên mật khẩu")}>  
+                <Text style={styles.link}>Quên mật khẩu?</Text>  
+            </TouchableOpacity>  
+            <TouchableOpacity onPress={() => Alert.alert("Đăng ký tài khoản")}>  
+                <Text style={styles.link}>Đăng ký ngay</Text>  
+            </TouchableOpacity>  
+        </View>  
+    );  
+}  
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-    backgroundColor: '#f5f5f5',
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
-  },
-  input: {
-    width: '100%',
-    height: 40,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    borderRadius: 5,
-    marginBottom: 10,
-    paddingHorizontal: 10,
-    backgroundColor: '#fff',
-  },
-});
-
-export default LoginPage;
+const styles = StyleSheet.create({  
+    container: {  
+        flex: 1,  
+        justifyContent: 'center',  
+        padding: 20,  
+        backgroundColor: '#fff',  
+    },  
+    title: {  
+        fontSize: 24,  
+        marginBottom: 20,  
+        textAlign: 'center',  
+    },  
+    input: {  
+        height: 50,  
+        borderColor: '#ccc',  
+        borderWidth: 1,  
+        marginBottom: 20,  
+        paddingHorizontal: 15,  
+    },  
+    button: {  
+        backgroundColor: '#007bff',  
+        padding: 15,  
+        alignItems: 'center',  
+        borderRadius: 5,  
+    },  
+    buttonText: {  
+        color: '#fff',  
+        fontSize: 18,  
+    },  
+    link: {  
+        marginTop: 15,  
+        color: '#007bff',  
+        textAlign: 'center',  
+    },  
+});  
